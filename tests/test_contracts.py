@@ -101,3 +101,26 @@ def test_result_supports_approval_and_artifacts() -> None:
     assert result.status is ResultStatus.REQUIRES_APPROVAL
     assert result.artifacts == (artifact,)
     assert result.approval is approval
+
+
+def test_approval_status_requires_approval_details() -> None:
+    with pytest.raises(ValueError, match="approval is required"):
+        CommandResult(
+            status=ResultStatus.REQUIRES_APPROVAL,
+            message="approval required",
+        )
+
+
+@pytest.mark.parametrize("status", [ResultStatus.SUCCESS, ResultStatus.FAILED])
+def test_non_approval_status_rejects_approval_details(status: ResultStatus) -> None:
+    approval = RequiresApproval(
+        reason="customer_output",
+        summary="Human review required before sending customer document.",
+    )
+
+    with pytest.raises(ValueError, match="approval must be absent"):
+        CommandResult(
+            status=status,
+            message="completed",
+            approval=approval,
+        )

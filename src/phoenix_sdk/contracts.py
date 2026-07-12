@@ -107,9 +107,19 @@ class CommandResult:
     approval: RequiresApproval | None = None
 
     def __post_init__(self) -> None:
-        object.__setattr__(self, "status", ResultStatus(self.status))
+        status = ResultStatus(self.status)
+        object.__setattr__(self, "status", status)
         object.__setattr__(self, "data", _immutable_mapping(self.data))
         object.__setattr__(self, "artifacts", tuple(self.artifacts))
+
+        if status is ResultStatus.REQUIRES_APPROVAL and self.approval is None:
+            raise ValueError(
+                "approval is required when status is requires_approval"
+            )
+        if status is not ResultStatus.REQUIRES_APPROVAL and self.approval is not None:
+            raise ValueError(
+                "approval must be absent unless status is requires_approval"
+            )
 
 
 @runtime_checkable
