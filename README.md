@@ -29,13 +29,11 @@ SDK Contract Foundation v0.1 includes:
 - Phoenix Core owns orchestration and shared services only.
 - Platform-level knowledge lives in `phoenix-pks`.
 
-## Project Knowledge
+## Canonical Phoenix Knowledge
 
-Canonical Phoenix project state, architecture, decisions, roadmap, and agent guidance live in:
+Platform-wide project state, architecture, decisions, roadmap, and agent guidance live in [`phoenix-pks`](https://github.com/Phoenix-AI-Platform/phoenix-pks).
 
-`Phoenix-AI-Platform/phoenix-pks`
-
-Repository-specific SDK details belong here.
+Start with the [Project State](https://github.com/Phoenix-AI-Platform/phoenix-pks/blob/main/project/02_PROJECT_STATE.md), [Current Sprint](https://github.com/Phoenix-AI-Platform/phoenix-pks/blob/main/project/05_CURRENT_SPRINT.md), and [ADR Index](https://github.com/Phoenix-AI-Platform/phoenix-pks/blob/main/adr/README.md). SDK-specific contract and development documentation remains authoritative in this repository.
 
 ## Development
 
